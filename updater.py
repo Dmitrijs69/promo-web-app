@@ -2,13 +2,10 @@ import urllib.request
 import xml.etree.ElementTree as ET
 import json
 
-# Твоя уникальная ссылка из Admitad
 ADMITAD_URL = "https://export.admitad.com/ru/webmaster/websites/2948626/coupons/export/?website=2948626&region=00&language=&keyword=&code=wqcqkqe6nm&user=dmitry_ivanovbaa29&format=xml&v=1"
 
 def update_coupons():
     print("⏳ Подключаемся к базе Admitad...")
-    
-    # Делаем запрос (притворяемся браузером, чтобы сервер нас не отбил)
     req = urllib.request.Request(ADMITAD_URL, headers={'User-Agent': 'Mozilla/5.0'})
     
     try:
@@ -19,48 +16,64 @@ def update_coupons():
         return
 
     print("⚙️ Анализируем данные...")
-    
     try:
         root = ET.fromstring(xml_data)
     except ET.ParseError:
-        print("❌ Ошибка: Admitad вернул неверный формат данных.")
+        print("❌ Ошибка parsing XML.")
         return
 
     coupons_list = []
 
-    # Проходимся по всем купонам в XML
     for coupon in root.findall('.//coupon'):
-        # Ищем название магазина
         campaign = coupon.find('campaign')
-        store_name = campaign.find('name').text if campaign is not None and campaign.find('name') is not None else "Неизвестный магазин"
-
-        # Ищем сам промокод
+        store_name = campaign.find('name').text if campaign is not None and campaign.find('name') is not None else "Магазин"
+        
         promocode = coupon.find('promocode')
         promocode_text = promocode.text if promocode is not None else ""
         
-        # Нам нужны только реальные промокоды (отсеиваем обычные акции без кода)
         if not promocode_text or promocode_text.lower() == "не требуется":
             continue 
 
-        # Описание скидки
         name = coupon.find('name')
-        title_text = name.text if name is not None else "Скидка на заказ"
+        title_text = name.text if name is not None else "Скидка"
         
-        # Твоя личная партнерская ссылка для заработка
         goto_link = coupon.find('goto_link')
         link_text = goto_link.text if goto_link is not None else ""
 
-        # Упаковываем в красивый словарь
         coupons_list.append({
-            "store": store_name,
+            "brand": store_name,  # Поменял ключ на 'brand', чтобы совпадало с index.html
             "title": title_text,
+            "description": "Акция от рекламодателя",
             "code": promocode_text,
+            "discount": "Скидка",
             "link": link_text
         })
 
-    print(f"✅ Найдено {len(coupons_list)} активных промокодов.")
+    # --- УМНЫЙ ТЕСТ-РЕЖИМ ---
+    if len(coupons_list) == 0:
+        print("⚠️ Офферы еще на модерации. Генерируем тестовые карточки для проверки системы...")
+        coupons_list = [
+            {
+                "brand": "Яндекс Еда (Тест)",
+                "title": "Скидка на первый заказ",
+                "description": "Проверка авто-обновления. Код скопируется, ссылка откроется!",
+                "code": "YANDEX500",
+                "discount": "500 руб",
+                "link": "https://ya.ru"
+            },
+            {
+                "brand": "Самокат (Тест)",
+                "title": "Минус 200 руб на продукты",
+                "description": "Тестовая карточка. Проверяем, как работает прокрутка в Web App.",
+                "code": "SAMOKAT200",
+                "discount": "200 руб",
+                "link": "https://google.com"
+            }
+        ]
+    else:
+        print(f"✅ Найдено {len(coupons_list)} активных промокодов в Admitad.")
 
-    # Перезаписываем наш data.json
+    # Сохраняем результат
     try:
         with open('data.json', 'w', encoding='utf-8') as f:
             json.dump(coupons_list, f, ensure_ascii=False, indent=4)
