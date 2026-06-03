@@ -1,0 +1,11 @@
+[
+  {
+    "id": "yandex_eda_500",
+    "brand": "Яндекс Еда",
+    "title": "Скидка на первый заказ",
+    "description": "Скидка для новых пользователей на заказы от 1000 руб.",
+    "code": "YANDEX500",
+    "discount": "500 руб",
+    "link": "https://your-admitad-deeplink-url-here.com"
+  }
+]
