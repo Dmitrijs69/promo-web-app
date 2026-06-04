@@ -1,0 +1,30 @@
+name: Auto Update Coupons
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Проверка репозитория
+      uses: actions/checkout@v4
+
+    - name: Настройка Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Выполнение скрипта обновления
+      run: python updater.py
+
+    - name: Сохранение изменений в GitHub
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add data.json
+        git diff-index --quiet HEAD || git commit -m "Автоматическое обновление купонов"
+        git push
