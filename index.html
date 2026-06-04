@@ -7,161 +7,139 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
+            background-color: var(--tg-theme-bg-color, #181818);
+            color: var(--tg-theme-text-color, #ffffff);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #181818;
-            color: #ffffff;
             margin: 0;
             padding: 15px;
-            box-sizing: border-box;
         }
-
-        #coupons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .coupon-card {
-            background-color: #242424;
+        .card {
+            background-color: var(--tg-theme-secondary-bg-color, #2c2c2c);
             border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-
-        .card-header {
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
-
         .brand {
-            font-size: 18px;
             font-weight: bold;
-            color: #ffffff;
+            font-size: 16px;
         }
-
         .discount {
-            background-color: #00c853;
-            color: #ffffff;
+            background-color: #4CAF50;
+            color: white;
             padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 14px;
+            border-radius: 12px;
+            font-size: 12px;
             font-weight: bold;
         }
-
-        .card-title {
+        .title {
             font-size: 15px;
             font-weight: 600;
-            color: #e0e0e0;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
-
-        .card-desc {
+        .desc {
             font-size: 13px;
-            color: #aaaaaa;
-            margin-bottom: 16px;
+            color: var(--tg-theme-hint-color, #aaaaaa);
+            margin-bottom: 15px;
             line-height: 1.4;
         }
-
-        .action-btn {
-            background-color: #7b68ee;
-            color: white;
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: var(--tg-theme-button-color, #8a2be2);
+            color: var(--tg-theme-button-text-color, #ffffff);
             border: none;
             border-radius: 8px;
             padding: 12px;
             font-size: 15px;
             font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s ease;
-            width: 100%;
-        }
-
-        .action-btn:active {
-            background-color: #6a5acd;
-        }
-
-        .no-data {
             text-align: center;
-            color: #888;
-            margin-top: 50px;
-            font-size: 16px;
+            cursor: pointer;
+        }
+        #error-log {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(255,0,0,0.1);
+            border-radius: 8px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <div id="coupons-container">
-        </div>
+<div id="coupons">
+    <p style="text-align:center; color:#888;">Загрузка промокодов...</p>
+</div>
+<div id="error-log"></div>
 
-    <script>
-        // Инициализируем Telegram Web App API
-        const tg = window.Telegram.WebApp;
-        if (tg) {
-            tg.ready();
-            tg.expand(); // Разворачиваем окно на максимум внутри Telegram
-        }
+<script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+    tg.ready();
 
-        async function loadCoupons() {
-            const container = document.getElementById('coupons-container');
-            
-            try {
-                // Хитрый трюк: добавляем ?v=ВРЕМЯ, чтобы GitHub Pages не кэшировал файл старыми данными
-                const response = await fetch('data.json?v=' + Date.now());
-                if (!response.ok) throw new Error('Файл данных не найден');
-                
-                const coupons = await response.json();
-                container.innerHTML = '';
+    const couponsContainer = document.getElementById('coupons');
+    const errorLog = document.getElementById('error-log');
 
-                if (!coupons || coupons.length === 0) {
-                    container.innerHTML = '<div class="no-data">🔥 Новые промокоды появятся совсем скоро!</div>';
-                    return;
-                }
-
-                // Перебираем массив купонов и строим HTML-структуру
-                coupons.forEach(coupon => {
-                    const card = document.createElement('div');
-                    card.className = 'coupon-card';
-                    card.innerHTML = `
-                        <div class="card-header">
-                            <span class="brand">${coupon.brand}</span>
-                            <span class="discount">${coupon.discount}</span>
-                        </div>
-                        <div class="card-title">${coupon.title}</div>
-                        <div class="card-desc">${coupon.description}</div>
-                        <button class="action-btn" onclick="handleCouponClick('${coupon.code}', '${coupon.link}')">
-                            Получить: ${coupon.code}
-                        </button>
-                    `;
-                    container.appendChild(card);
-                });
-
-            } catch (error) {
-                console.error('Ошибка загрузки купонов:', error);
-                container.innerHTML = '<div class="no-data">❌ Не удалось загрузить промокоды. Попробуйте позже.</div>';
+    // Относительный путь! Ищет файл строго в той же папке, где лежит index.html
+    fetch('data.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Ошибка сети: ${response.status} ${response.statusText}`);
             }
-        }
+            return response.json();
+        })
+        .then(data => {
+            couponsContainer.innerHTML = '';
+            
+            if (!Array.isArray(data) || data.length === 0) {
+                couponsContainer.innerHTML = '<p style="text-align:center;">Офферы пока загружаются. Зайдите позже!</p>';
+                return;
+            }
 
-        function handleCouponClick(code, link) {
-            // Копируем промокод в буфер обмена пользователя
-            navigator.clipboard.writeText(code).then(() => {
-                
-                // Включаем легкую вибрацию на телефоне (если открыто внутри Telegram)
-                if (tg && tg.HapticFeedback) {
-                    tg.HapticFeedback.notificationOccurred('success');
-                }
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="header">
+                        <div class="brand">${item.brand || 'Магазин'}</div>
+                        <div class="discount">${item.discount || '%'}</div>
+                    </div>
+                    <div class="title">${item.title || 'Скидка'}</div>
+                    <div class="desc">${item.description || ''}</div>
+                    <button class="btn" onclick="copyAndRedirect('${item.code}', '${item.link}')">
+                        Получить: ${item.code || 'CODE'}
+                    </button>
+                `;
+                couponsContainer.appendChild(card);
+            });
+        })
+        .catch(error => {
+            couponsContainer.innerHTML = '';
+            errorLog.style.display = 'block';
+            errorLog.innerHTML = `<b>Техническая ошибка:</b><br>Не удалось загрузить офферы из data.json.<br><br><i>Детали: ${error.message}</i>`;
+        });
 
-                alert('🔥 Промокод ' + code + ' скопирован в буфер обмена! Сейчас откроется сайт магазина.');
-
-                // Перенаправляем пользователя по реферальной ссылке
-                if (tg && tg.openLink) {
-                    tg.openLink(link); // Открытие внутри встроенного браузера Telegram
-                } else {
-                    window.open(link, '_blank'); // Обычное открытие, если тестируешь в браузере на ПК
-                }
-            }).catch(err => {
-                console.error('Ошибка копирования:', err);
-                // Если буфер обмена заблокирован, всё равно открываем ссылку
-                if (tg && tg
+    function copyAndRedirect(code, link) {
+        if (!link || link === "undefined") return;
+        
+        navigator.clipboard.writeText(code).then(() => {
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                tg.openLink(link);
+            } else {
+                window.open(link, '_blank');
+            }
+        }).catch(() => {
+            window.location.href = link;
+        });
+    }
+</script>
+</body>
+</html>
