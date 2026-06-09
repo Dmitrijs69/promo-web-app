@@ -1,6 +1,30 @@
 [
     {
         "brand": "Магазин",
+        "title": "Скидка 15% на бронирование от 3-х ночей",
+        "description": "Акция от рекламодателя",
+        "code": "ADM-JUNE15",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "Скидка 10 % при оплате курса сразу.",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "Продли отдых с Kaspersky",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
         "title": "Скидка 1000 р на заказ от 10 000 р.",
         "description": "Акция от рекламодателя",
         "code": "ADM-ALL-1000",
@@ -41,6 +65,30 @@
     },
     {
         "brand": "Магазин",
+        "title": "Скидка 20% на Kaspersky Who Calls",
+        "description": "Акция от рекламодателя",
+        "code": "heroes",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "Просто люди живут онлайн. Kaspersky защищает.",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "TOO Premium 45D",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
         "title": "Скидка 20% на совместное обучение с другом при покупке полного курса General",
         "description": "Акция от рекламодателя",
         "code": "Not required",
@@ -57,6 +105,14 @@
     },
     {
         "brand": "Магазин",
+        "title": "Промокод на скидку -20% на KWC",
+        "description": "Акция от рекламодателя",
+        "code": "standalone20",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
         "title": "Скидка 8% в Яндекс Практикум Английский!",
         "description": "Акция от рекламодателя",
         "code": "FamilyYPENG",
@@ -68,6 +124,14 @@
         "title": "Скидка 8% в Яндекс Практикум Английский!",
         "description": "Акция от рекламодателя",
         "code": "admitad",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "Покупайте Kaspersky Premium и MyOffice со скидкой 51%",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
         "discount": "Скидка",
         "link": ""
     },
