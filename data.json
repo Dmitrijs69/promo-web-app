@@ -1,6 +1,14 @@
 [
     {
         "brand": "Магазин",
+        "title": "Продли отдых с Kaspersky",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
         "title": "Купите курс \"ИИ-инженер\" сейчас со скидкой 10%",
         "description": "Акция от рекламодателя",
         "code": "Not required",
@@ -60,14 +68,6 @@
         "title": "Скидка 30% на первые 3 месяца от Яндекс 360 для бизнеса.",
         "description": "Акция от рекламодателя",
         "code": "admbusiness360",
-        "discount": "Скидка",
-        "link": ""
-    },
-    {
-        "brand": "Магазин",
-        "title": "Продли отдых с Kaspersky",
-        "description": "Акция от рекламодателя",
-        "code": "Not required",
         "discount": "Скидка",
         "link": ""
     },
