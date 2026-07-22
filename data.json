@@ -1,6 +1,14 @@
 [
     {
         "brand": "Магазин",
+        "title": "Скидка 7% на все",
+        "description": "Акция от рекламодателя",
+        "code": "YAPRACTICUM7",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
         "title": "Продли отдых с Kaspersky",
         "description": "Акция от рекламодателя",
         "code": "Not required",
