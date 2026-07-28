@@ -1,6 +1,14 @@
 [
     {
         "brand": "Магазин",
+        "title": "Скидка 10%",
+        "description": "Акция от рекламодателя",
+        "code": "ADM-APT10",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
         "title": "Скидка 7% на все",
         "description": "Акция от рекламодателя",
         "code": "YAPRACTICUM7",
