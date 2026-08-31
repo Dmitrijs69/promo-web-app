@@ -1,6 +1,14 @@
 [
     {
         "brand": "Магазин",
+        "title": "Акция Back to School 2026 - скидка 20% на курсы",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
         "title": "Back to School 2026 скидка 16% на все курсы",
         "description": "Акция от рекламодателя",
         "code": "Not required",
