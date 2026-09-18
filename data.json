@@ -1,6 +1,30 @@
 [
     {
         "brand": "Магазин",
+        "title": "Back to School 2026 скидка 16% на все курсы",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "Скидка 16% на все курсы Яндекс Практикума",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "-16% на все курсы английского + при оплате 3 курса в подарок",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
         "title": "Специальное предложение: скидка до 28%",
         "description": "Акция от рекламодателя",
         "code": "Not required",
