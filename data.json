@@ -1,6 +1,54 @@
 [
     {
         "brand": "Магазин",
+        "title": "Скидка 20% при бронировании отелей и иного жилья со страницы https://travel.yandex.ru/wow/promo/autu",
+        "description": "Акция от рекламодателя",
+        "code": "VOTETODA20",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "Скидка 10% при бронировании отелей и иного жилья со страницы https://travel.yandex.ru/wow/promo/autu",
+        "description": "Акция от рекламодателя",
+        "code": "VOTETODA10",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "Скидка 20% при бронировании отелей и иного жилья",
+        "description": "Акция от рекламодателя",
+        "code": "SHKAF-ZABIT",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "Скидка +20% на Kaspersky Premium, Standart и Plus",
+        "description": "Акция от рекламодателя",
+        "code": "blackfriday20",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "Скидка 15% по промокоду",
+        "description": "Акция от рекламодателя",
+        "code": "SUPER15",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
+        "title": "Скидка 25% по промокоду",
+        "description": "Акция от рекламодателя",
+        "code": "SUPER25",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
         "title": "Cкидка до 35%",
         "description": "Акция от рекламодателя",
         "code": "Not required",
