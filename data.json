@@ -9,6 +9,14 @@
     },
     {
         "brand": "Магазин",
+        "title": "Приобретайте продукты Kaspersky Standard, Kaspersky Plus и Kaspersky Premium с повышенными скидками!",
+        "description": "Акция от рекламодателя",
+        "code": "Not required",
+        "discount": "Скидка",
+        "link": ""
+    },
+    {
+        "brand": "Магазин",
         "title": "В Черную пятницу  скидка до 30% на все курсы",
         "description": "Акция от рекламодателя",
         "code": "Not required",
